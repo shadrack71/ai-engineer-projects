@@ -77,7 +77,7 @@ class LangGraphMCPClient:
     def build_graph(self):
         """Construct the stateful LangGraph."""
 
-        # NODE 1: The LLM Agent
+        # The LLM Agent
         async def agent_node(state: AgentState):
             print("\n[Thinking...] Sending request to OpenAI...")
             response = await self.openai_client.chat.completions.create(
@@ -91,7 +91,7 @@ class LangGraphMCPClient:
             # LangGraph's state reducer (operator.add) automatically appends it to the history.
             return {"messages": [message.model_dump(exclude_unset=True)]}
 
-        # NODE 2: The Tool Executor
+        #  The Tool Executor
         async def tool_node(state: AgentState):
             last_message = state["messages"][-1]
             tool_messages = []
