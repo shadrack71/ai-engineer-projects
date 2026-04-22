@@ -51,7 +51,7 @@ class MCPOpenAIClient:
         tools = response.tools
         print("\nConnected to server with tools:", [tool.name for tool in tools])
 
-        # Convert MCP tools to OpenAI tool format (Much simpler than Gemini!)
+        # Convert MCP tools to OpenAI tool format
         self.openai_tools = [
             {
                 "type": "function",
@@ -125,7 +125,7 @@ class MCPOpenAIClient:
         messages = [{"role": "user", "content": query}]
 
         while True:
-            # 1. Visually track the network call
+            #  Visually track the network call
             print("\n[Thinking...] Sending request to OpenAI...")
 
             response = await self.openai_client.chat.completions.create(
@@ -150,7 +150,7 @@ class MCPOpenAIClient:
                     try:
                         result = await self.session.call_tool(tool_name, tool_args)
 
-                        # 3. Handle empty terminal outputs gracefully
+                        #  Handle empty terminal outputs gracefully
                         if result.content and result.content[0].text.strip():
                             tool_output = result.content[0].text
                         else:
