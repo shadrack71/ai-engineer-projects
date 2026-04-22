@@ -71,14 +71,26 @@ try:
         """Run a terminal command inside the workspace directory."""
         try:
             logging.info(f"Executing command: {command}")
+
+            # ADDED TIMEOUT AND DEVNULL STDIN TO PREVENT HANGS
             result = subprocess.run(
                 command,
                 shell=True,
                 cwd=DEFAULT_WORKSPACE,
                 capture_output=True,
-                text=True
+                text=True,
+                timeout=10,  # Kill the command if it takes over 10 seconds
+                stdin=subprocess.DEVNULL  # Never wait for human keyboard input
             )
-            return result.stdout or result.stderr
+
+            # Guarantee we always return a string
+            output = result.stdout or result.stderr
+            return output if output.strip() else "[Command executed successfully with no output]"
+
+        except subprocess.TimeoutExpired:
+            error_msg = f"Error: Command '{command}' timed out after 10 seconds. Do not use commands that require interactive user input."
+            logging.error(error_msg)
+            return error_msg
         except Exception as e:
             logging.error(f"Command execution failed: {str(e)}")
             return str(e)
