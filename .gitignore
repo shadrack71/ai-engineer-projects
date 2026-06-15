@@ -1,1 +1,5 @@
 /.env
+/image
+/imageID.txt
+/yolo8/image
+/labels
