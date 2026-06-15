@@ -1,5 +1,5 @@
 /.env
 /image
 /imageID.txt
-/yolo8/image
+/yolo8/train/images
 /labels

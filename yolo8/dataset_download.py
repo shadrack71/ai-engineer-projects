@@ -13,18 +13,18 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-"""Open Images image downloader.
+"""Open Images images downloader.
 
-This script downloads a subset of Open Images images, given a list of image ids.
+This script downloads a subset of Open Images images, given a list of images ids.
 Typical uses of this tool might be downloading images:
 - That contain a certain category.
 - That have been annotated with certain types of annotations (e.g. Localized
 Narratives, Exhaustively annotated people, etc.)
 
-The input file IMAGE_LIST should be a text file containing one image per line
+The input file IMAGE_LIST should be a text file containing one images per line
 with the format <SPLIT>/<IMAGE_ID>, where <SPLIT> is either "train", "test",
-"validation", or "challenge2018"; and <IMAGE_ID> is the image ID that uniquely
-identifies the image in Open Images. A sample file could be:
+"validation", or "challenge2018"; and <IMAGE_ID> is the images ID that uniquely
+identifies the images in Open Images. A sample file could be:
   train/f9e0434389a1d4dd
   train/1a007563ebc18664
   test/ea8bfd4e765304db
@@ -56,7 +56,7 @@ def check_and_homogenize_image_list(image_list):
       yield from check_and_homogenize_one_image(image)
     except (ValueError, AttributeError):
       raise ValueError(
-          f'ERROR in line {line_number} of the image list. The following image '
+          f'ERROR in line {line_number} of the images list. The following images '
           f'string is not recognized: "{image}".')
 
 
@@ -72,7 +72,7 @@ def download_one_image(bucket, split, image_id, download_folder):
                          os.path.join(download_folder, f'{image_id}.jpg'))
   except botocore.exceptions.ClientError as exception:
     sys.exit(
-        f'ERROR when downloading image `{split}/{image_id}`: {str(exception)}')
+        f'ERROR when downloading images `{split}/{image_id}`: {str(exception)}')
 
 
 def download_all_images(args):
@@ -114,7 +114,7 @@ if __name__ == '__main__':
       'image_list',
       type=str,
       default=None,
-      help=('Filename that contains the split + image IDs of the images to '
+      help=('Filename that contains the split + images IDs of the images to '
             'download. Check the document'))
   parser.add_argument(
       '--num_processes',
