@@ -1,5 +1,5 @@
 
-path: H:\SOFTWARE_DEVELOPMENT\MACHINE_LEARNING_PROJECT\ai-engineer-projects\yolo8\train  # dataset root dir
+path: H:\SOFTWARE_DEVELOPMENT\MACHINE_LEARNING_PROJECT\ai-engineer-projects\yolo8\object_detection\train  # dataset root dir
 train: images  # train images (relative to 'path')
 val: images  # val images (relative to 'path')
 

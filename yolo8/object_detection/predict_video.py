@@ -3,10 +3,11 @@ import os
 from ultralytics import YOLO
 import cv2
 
-root_dir = 'H:/SOFTWARE_DEVELOPMENT/MACHINE_LEARNING_PROJECT/ai-engineer-projects/yolo8/'
+# root_dir = '/yolo8/object_detection/'
+root_dir = r'H:\SOFTWARE_DEVELOPMENT\MACHINE_LEARNING_PROJECT\ai-engineer-projects\yolo8\object_detection'
 VIDEOS_DIR = os.path.join(root_dir, 'videos')
 
-# print(VIDEOS_DIR)
+print(VIDEOS_DIR)
 
 video_path = os.path.join(VIDEOS_DIR, 'alpaca1.mp4')
 video_path_out = '{}_out.mp4'.format(video_path)
@@ -16,7 +17,7 @@ ret, frame = cap.read()
 H, W, _ = frame.shape
 out = cv2.VideoWriter(video_path_out, cv2.VideoWriter_fourcc(*'MP4V'), int(cap.get(cv2.CAP_PROP_FPS)), (W, H))
 
-model_path = os.path.join(root_dir, 'runs', 'detect', 'train-2', 'weights', 'best.pt')
+model_path = os.path.join(root_dir, 'runs', 'detect', 'train-2', 'weights', 'last.pt')
 
 # Load a model
 model = YOLO(model_path)  # load a custom model
